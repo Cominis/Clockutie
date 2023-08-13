@@ -6,41 +6,30 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.daumantas.clockutie.ui.Clock
 import com.daumantas.clockutie.ui.theme.ClockutieTheme
+import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val calendar = Calendar.getInstance()
+        val currentHours = calendar.get(Calendar.HOUR)
+        val currentMins = calendar.get(Calendar.MINUTE)
+        val currentSecs = calendar.get(Calendar.SECOND)
+
         setContent {
             ClockutieTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.surface,
                 ) {
-                    Greeting("Android")
+                    Clock(currentHours, currentMins, currentSecs)
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ClockutieTheme {
-        Greeting("Android")
-    }
-}
